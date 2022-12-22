@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Navbar, Button } from 'react-bootstrap';
-import useAuth from '../hooks/index.js';
+import { useAuth } from '../hooks';
 
 const AuthButton = () => {
   const auth = useAuth();
@@ -11,9 +10,7 @@ const AuthButton = () => {
 const Header = () => (
   <Navbar bg="white" expand="lg" className="shadow-sm">
     <div className="container">
-      <Navbar.Brand>
-        <Link to="/">New Slack!</Link>
-      </Navbar.Brand>
+      <Navbar.Brand href="/">Hexlet Chat</Navbar.Brand>
       <AuthButton />
     </div>
   </Navbar>

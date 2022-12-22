@@ -3,14 +3,19 @@ import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchChannels, selectors } from '../../slices/channelsSlice';
 import ChannelButton from '../ChannelButtons';
+import MessagesForm from '../MessagesForm';
+import { selectors as messagesSelectors } from '../../slices/messagesSlice';
 
-const Chat = () => {
+const PrivatePage = () => {
   const dispatch = useDispatch();
   dispatch(fetchChannels());
   useEffect(() => {
     dispatch(fetchChannels());
   }, [dispatch]);
   const channels = useSelector(selectors.selectAll);
+  const messages = useSelector(messagesSelectors.selectAll);
+  const { currentChannelId } = useSelector((state) => state.channels);
+  const currentMessages = messages.filter((message) => message.channelId === currentChannelId);
 
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
@@ -41,12 +46,37 @@ const Chat = () => {
           </Nav>
         </Col>
         <Col className="p-0 h-100">
-          <div className="bg-light mb-4 p-3 shadow-sm small" />
-          <div id="messages-box" className="chat-messages overflow-auto px-5" />
-          <div className="mt-auto px-5 py-3" />
+          <div className="d-flex flex-column h-100">
+            <div className="bg-light mb-4 p-3 shadow-sm small">
+              <p className="m-0">
+                <b>
+                  #{' '}
+                  {channels
+                    .filter((channel) => channel.id === currentChannelId)
+                    .map((channel) => channel.name)
+                    .join('')}
+                </b>
+              </p>
+              <span className="text-muted">{currentMessages.length} сообщений</span>
+            </div>
+            <div id="messages-box" className="chat-messages overflow-auto px-5">
+              {currentMessages.map((message) => (
+                <div key={message.id} className="text-break mb-2">
+                  <b>{message.username}</b>
+                  <span>: </span>
+                  {message.body}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-auto px-5 py-3">
+            <MessagesForm />
+          </div>
         </Col>
       </Row>
     </Container>
   );
 };
-export default Chat;
+
+export default PrivatePage;

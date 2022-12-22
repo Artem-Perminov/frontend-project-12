@@ -4,9 +4,10 @@ import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import avatar from '../../assets/avatar.jpg';
+
+import { useAuth } from '../../hooks';
 import routes from '../../routes';
-import useAuth from '../../hooks';
+import avatar from '../../assets/avatar.jpg';
 
 const LoginPage = () => {
   const auth = useAuth();
@@ -99,7 +100,7 @@ const LoginPage = () => {
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>Нет аккаунта? </span> <Link to={routes.signupPagePath()}>Регистрация</Link>
+                <span>Нет аккаунта?</span> <Link to={routes.signupPagePath()}>Регистрация</Link>
               </div>
             </div>
           </div>
