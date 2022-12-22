@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import useAuth from '../../hooks';
-import routes from '../../routes';
+import React, { useEffect } from 'react';
+import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchChannels, selectors } from '../../slices/channelsSlice';
+import ChannelButton from '../ChannelButtons';
 
 const Chat = () => {
-  const auth = useAuth();
-  const [setContent] = useState('');
+  const dispatch = useDispatch();
+  dispatch(fetchChannels());
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios.get(routes.dataPath(), { headers: auth.getAuthHeader() });
-      setContent(data);
-    };
-    fetch();
-  }, [auth, setContent]);
+    dispatch(fetchChannels());
+  }, [dispatch]);
+  const channels = useSelector(selectors.selectAll);
+
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
       <Row className="h-100 bg-white flex-md-row">
         <Col xs={4} md={2} className="border-end pt-5 px-0 bg-light">
           <div className="d-flex justify-content-between mb-2 ps-4 pe-2">
             <span>Каналы</span>
-            <Button type="button" variant="" className="p-0 btn-group-vertical text-primary">
+            <Button variant="" className="p-0 btn-group-vertical text-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -34,6 +32,13 @@ const Chat = () => {
               <span className="visually-hidden">+</span>
             </Button>
           </div>
+          <Nav fill variant="pills" className="flex-column px-2" defaultActiveKey="">
+            {channels.map((channel) => (
+              <Nav.Item key={channel.id} className="w-100">
+                <ChannelButton channel={channel} />
+              </Nav.Item>
+            ))}
+          </Nav>
         </Col>
         <Col className="p-0 h-100">
           <div className="bg-light mb-4 p-3 shadow-sm small" />
@@ -44,5 +49,4 @@ const Chat = () => {
     </Container>
   );
 };
-
 export default Chat;
