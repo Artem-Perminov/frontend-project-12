@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import Header from './components/Header';
-import LoginPage from './components/pages/LoginPage';
-import NotFoundPage from './components/pages/NotFoundPage';
-import PrivatePage from './components/pages/PrivatePage';
-import routes from './routes';
-import { AuthContext } from './context';
-import { useAuth } from './hooks';
+import Header from './Header';
+import LoginPage from './pages/LoginPage';
+import NotFoundPage from './pages/NotFoundPage';
+import PrivatePage from './pages/PrivatePage';
+import routes from '../routes';
+import { AuthContext } from '../context';
+import { useAuth } from '../hooks';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
