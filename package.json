@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/Artem-Perminov/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Artem-Perminov/frontend-project-12/actions)",
-  "main": "index.js",
+  "main": "./frontend/src/index.js",
   "scripts": {
     "postinstall": "cd frontend && npm ci",
     "build": "npm run build --prefix frontend",

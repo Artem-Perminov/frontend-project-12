@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useContext, createContext } from 'react';
 
-import { AuthContext, ApiContext } from '../context';
+export const AuthContext = createContext({});
+export const ApiContext = createContext({});
 
 export const useAuth = () => useContext(AuthContext);
-export const useSocket = () => useContext(ApiContext);
+export const useChatAPI = () => useContext(ApiContext);
