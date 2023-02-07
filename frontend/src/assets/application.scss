@@ -1,2 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~react-toastify/dist/ReactToastify.css';
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.async-spinner {
+  content: 'Loading...';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+
+  z-index: 1;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+
+  &:not(:required) {
+    content: '';
+    border-radius: 50%;
+    border: 2px solid gray;
+    border-top-color: white;
+    border-bottom-color: white;
+    animation: spinner .6s linear infinite;
+  }
+}
 
