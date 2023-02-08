@@ -5,6 +5,6 @@ import routes from '../routes';
 
 const PrivateRout = ({ children }) => {
   const auth = useAuth();
-  return !auth.user ? children : <Navigate to={routes.chatPagePath()} />;
+  return (!auth.user) ? children : <Navigate to={routes.chatPagePath()} />;
 };
 export default PrivateRout;

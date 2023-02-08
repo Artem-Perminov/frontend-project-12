@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchChannels, selectors } from '../../slices/channelsSlice';
-import ChannelButton from '../ChannelButtons';
-import MessagesForm from '../MessagesForm';
-import { selectors as messagesSelectors } from '../../slices/messagesSlice';
+import { fetchChannels, selectors } from '../slices/channelsSlice';
+import ChannelButton from './ChannelButtons';
+import MessagesForm from './MessagesForm';
+import { selectors as messagesSelectors } from '../slices/messagesSlice';
 
 const PrivatePage = () => {
   const dispatch = useDispatch();
