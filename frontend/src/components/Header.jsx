@@ -1,19 +1,23 @@
 import React from 'react';
 import { Navbar, Button } from 'react-bootstrap';
-import { useAuth } from '../hooks';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../hooks/index';
+import routes from '../routes';
 
-const AuthButton = () => {
+const Header = () => {
+  const { t } = useTranslation();
   const auth = useAuth();
-  return auth.user && <Button onClick={auth.logOut}>Выйти</Button>;
+  return (
+    <Navbar bg="white" expand="lg" className="shadow-sm">
+      <div className="container">
+        <Navbar.Brand href="/">{t('navbar.header')}</Navbar.Brand>
+        {auth.user && (
+          <Button href={routes.loginPagePath()} onClick={auth.logOut}>
+            {t('navbar.btn_out')}
+          </Button>
+        )}
+      </div>
+    </Navbar>
+  );
 };
-
-const Header = () => (
-  <Navbar bg="white" expand="lg" className="shadow-sm">
-    <div className="container">
-      <Navbar.Brand href="/">Hexlet Chat</Navbar.Brand>
-      <AuthButton />
-    </div>
-  </Navbar>
-);
-
 export default Header;
