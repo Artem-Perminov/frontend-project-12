@@ -4,9 +4,10 @@ import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
-import { useAuth } from '../../hooks';
-import routes from '../../routes';
+import { useAuth } from '../../hooks/index';
+import routes from '../../routes.js';
 import avatar from '../../assets/avatar.jpg';
 
 const LoginPage = () => {
@@ -15,6 +16,7 @@ const LoginPage = () => {
   const inputRef = useRef();
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -35,14 +37,14 @@ const LoginPage = () => {
         navigate(from);
       } catch (error) {
         if (!error.isAxiosError) {
-          toast.error('errors unknown');
+          toast.error(t('errors.errors_unknown'));
           return;
         }
         if (error.response?.status === 401) {
           setAuthFailed(true);
           inputRef.current.focus();
         } else {
-          toast.error('errors network');
+          toast.error(t('errors.errors_network'));
         }
       }
     },
@@ -55,10 +57,10 @@ const LoginPage = () => {
           <div className="card shadow-sm">
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src={avatar} className="rounded-circle" alt="login.header" />
+                <img src={avatar} className="rounded-circle" alt={t('login_page.avatar')} />
               </div>
               <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
-                <h1 className="text-center mb-4">Войти</h1>
+                <h1 className="text-center mb-4">{t('login_page.header')}</h1>
                 <Form.Group className="form-floating mb-3">
                   <Form.Control
                     onChange={formik.handleChange}
@@ -69,10 +71,9 @@ const LoginPage = () => {
                     isInvalid={authFailed}
                     required
                     ref={inputRef}
-                    placeholder="Ваш ник"
+                    placeholder={t('login_page.placeholder')}
                   />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label htmlFor="username">Ваш ник</label>
+                  <label htmlFor="username">{t('login_page.placeholder')}</label>
                 </Form.Group>
                 <Form.Group className="form-floating mb-4">
                   <Form.Control
@@ -84,23 +85,27 @@ const LoginPage = () => {
                     autoComplete="current-password"
                     isInvalid={authFailed}
                     required
-                    placeholder="Пароль"
+                    placeholder={t('login_page.password')}
                   />
-                  <Form.Label htmlFor="password">Пароль</Form.Label>
+                  <Form.Label htmlFor="password">{t('login_page.password')}</Form.Label>
                   {authFailed && (
                     <Form.Control.Feedback type="invalid" tooltip>
-                      Логин или пароль не заргестрированны
+                      {t('errors.errors_unregistered')}
                     </Form.Control.Feedback>
                   )}
                 </Form.Group>
-                <Button type="submit" variant="outline-primary" className="w-100 mb-3">
-                  Войти
+                <Button type="submit" variant="outline-primary" className="w-100 mb-3" disabled={formik.isSubmitting}>
+                  {t('login_page.btn_in')}
                 </Button>
               </Form>
             </div>
             <div className="card-footer p-4">
               <div className="text-center">
-                <span>Нет аккаунта?</span> <Link to={routes.signupPagePath()}>Регистрация</Link>
+                <span>
+                  {t('login_page.no_account')}
+                  {' '}
+                </span>
+                <Link to={routes.signupPagePath()}>{t('login_page.registration')}</Link>
               </div>
             </div>
           </div>

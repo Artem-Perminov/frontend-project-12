@@ -4,10 +4,10 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import { Provider as ProviderRollbar, ErrorBoundary, LEVEL_WARN } from '@rollbar/react';
 import ru from './locales/ru.js';
-import App from './components/App';
+import App from './components/App.jsx';
 import store from './slices/index.js';
 import buildChatApi from './api/buildChatApi.js';
-import NotFoundPage from './components/pages/NotFoundPage';
+import NotFoundPage from './components/notFoundPage/NotFoundPage.jsx';
 import { ApiContext } from './hooks/index';
 
 const ErrorBoundaryPage = () => <NotFoundPage />;
