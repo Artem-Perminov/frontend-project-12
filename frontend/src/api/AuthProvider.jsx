@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AuthContext } from '../hooks/index.js';
+import { AuthContext } from '../hooks/index';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
