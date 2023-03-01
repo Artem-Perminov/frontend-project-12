@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+import {
+  Container, Row, Col, Button, Nav,
+} from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchChannels, selectors } from '../slices/channelsSlice';
 import ChannelButton from './ChannelButtons';
@@ -50,14 +52,19 @@ const PrivatePage = () => {
             <div className="bg-light mb-4 p-3 shadow-sm small">
               <p className="m-0">
                 <b>
-                  #{' '}
+                  #
+                  {' '}
                   {channels
                     .filter((channel) => channel.id === currentChannelId)
                     .map((channel) => channel.name)
                     .join('')}
                 </b>
               </p>
-              <span className="text-muted">{currentMessages.length} сообщений</span>
+              <span className="text-muted">
+                {currentMessages.length}
+                {' '}
+                сообщений
+              </span>
             </div>
             <div id="messages-box" className="chat-messages overflow-auto px-5">
               {currentMessages.map((message) => (

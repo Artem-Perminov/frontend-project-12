@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: "error" */
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useRef } from 'react';
 import { Button } from 'react-bootstrap';
 import { Formik } from 'formik';
