@@ -15,7 +15,7 @@ import routes from '../routes.js';
 import { useAuth } from '../hooks/index';
 import AuthProvider from '../api/AuthProvider.jsx';
 import Layout from './Layout.jsx';
-import PrivateRout from '../api/PrivateRout.jsx';
+import PrivateRout from '../PrivateRout.jsx';
 
 const PrivateOutlet = () => {
   const auth = useAuth();
